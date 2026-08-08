@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>100 Hommes vs 1 Gorille</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:system-ui,-apple-system,sans-serif;background:#090d13;color:#fff}
+body{display:flex;justify-content:center}.app{width:100%;max-width:900px;height:100vh;display:flex;flex-direction:column}
+header{padding:12px 14px;display:flex;align-items:center;gap:12px;background:#151b24;border-bottom:1px solid #26303d}
+h1{font-size:18px;margin:0}.stats{font-size:12px;color:#b8c2d1;margin-top:3px}button{border:0;border-radius:12px;padding:11px 16px;font-weight:800;font-size:15px;background:#f59e0b;color:#111}
+#play{margin-left:auto}.arena{position:relative;flex:1;overflow:hidden;background:radial-gradient(circle,#34495e 0,#18232e 55%,#0b1118 100%)}
+.arena:before{content:"";position:absolute;inset:0;opacity:.1;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:40px 40px}
+.unit{position:absolute;transform:translate(-50%,-50%);z-index:2;user-select:none}.man{font-size:18px}.gorilla{font-size:54px;z-index:5}
+.hp{position:absolute;left:50%;top:-7px;transform:translateX(-50%);width:25px;height:4px;background:#450b0b;border-radius:5px;overflow:hidden}.hp i{display:block;height:100%;background:#22c55e}
+.overlay{position:absolute;inset:0;z-index:10;background:#000a;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#171e29;border:1px solid #303b4b;border-radius:22px;padding:28px;text-align:center;width:min(90%,380px);box-shadow:0 20px 70px #0009}
+.card h2{font-size:30px;margin:0 0 8px}.card p{color:#c7d0dc;line-height:1.5}.big{font-size:20px;padding:14px 28px}
+@media(max-width:500px){header{padding-top:max(12px,env(safe-area-inset-top))}.arena{min-height:0}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div><h1>🦍 100 Hommes vs 1 Gorille</h1><div id="stats" class="stats">Prêt à jouer</div></div>
+<button id="play">JOUER</button>
+</header>
+<div id="arena" class="arena">
+<div id="overlay" class="overlay">
+<div class="card"><h2>🦍 VS 👨</h2><p>100 hommes affrontent un gorille.<br>Regarde la simulation jusqu'au dernier survivant.</p><button id="start" class="big">COMMENCER</button></div>
+</div>
+</div>
+</div>
+<script>
+const arena=document.getElementById("arena"),stats=document.getElementById("stats"),overlay=document.getElementById("overlay"),start=document.getElementById("start"),play=document.getElementById("play");
+let men=[],g=null,running=false,last=0,time=0;
+
+function rand(a,b){return a+Math.random()*(b-a)}
+function reset(){
+ arena.querySelectorAll(".unit").forEach(e=>e.remove());
+ men=[];time=0;running=true;overlay.style.display="none";
+ const w=arena.clientWidth,h=arena.clientHeight,cx=w/2,cy=h/2,r=Math.min(w,h)*.36;
+ for(let i=0;i<100;i++){
+   const a=Math.random()*Math.PI*2,rr=rand(r*.72,r);
+   const m={x:cx+Math.cos(a)*rr,y:cy+Math.sin(a)*rr,hp:100,cool:rand(0,.6)};
+   m.el=document.createElement("div");m.el.className="unit man";m.el.textContent="👨";
+   m.el.innerHTML+='<span class="hp"><i></i></span>';arena.appendChild(m.el);men.push(m);
+ }
+ g={x:cx,y:cy,hp:1000,cool:0};
+ g.el=document.createElement("div");g.el.className="unit gorilla";g.el.innerHTML='🦍<span class="hp" style="width:62px"><i></i></span>';
+ arena.appendChild(g.el);
+ last=performance.now();requestAnimationFrame(loop);
+}
+function finish(gorillaWon,survivors){
+ running=false;overlay.style.display="flex";
+ overlay.querySelector("h2").textContent=gorillaWon?"🦍 VICTOIRE DU GORILLE !":"👨 VICTOIRE DES HOMMES !";
+ overlay.querySelector("p").innerHTML=gorillaWon?"Les 100 hommes ont été vaincus.":survivors+" hommes ont survécu.";
+ start.textContent="REJOUER";play.textContent="REJOUER";
+}
+function loop(now){
+ if(!running)return;
+ const dt=Math.min(.05,(now-last)/1000);last=now;time+=dt;
+ let alive=men.filter(m=>m.hp>0);
+ if(alive.length){
+   let target=alive[0],best=Infinity;
+   for(const m of alive){const d=Math.hypot(m.x-g.x,m.y-g.y);if(d<best){best=d;target=m}}
+   if(best>55){g.x+=(target.x-g.x)/best*82*dt;g.y+=(target.y-g.y)/best*82*dt}
+   g.cool-=dt;
+   if(best<62&&g.cool<=0){g.cool=.32;target.hp-=27}
+ }
+ for(const m of alive){
+   const dx=g.x-m.x,dy=g.y-m.y,d=Math.hypot(dx,dy)||1;
+   m.cool-=dt;
+   if(d>49){m.x+=dx/d*35*dt;m.y+=dy/d*35*dt}
+   else if(m.cool<=0){m.cool=.55;g.hp-=2.15}
+   m.el.style.left=m.x+"px";m.el.style.top=m.y+"px";
+   m.el.querySelector("i").style.width=Math.max(0,m.hp)+"%";
+   if(m.hp<=0)m.el.remove();
+ }
+ g.el.style.left=g.x+"px";g.el.style.top=g.y+"px";g.el.querySelector("i").style.width=Math.max(0,g.hp/10)+"%";
+ stats.textContent=`👨 ${alive.length} survivants • 🦍 ${Math.max(0,Math.round(g.hp/10))}% • ${time.toFixed(1)} s`;
+ if(!alive.length||g.hp<=0){finish(g.hp<=0,alive.length);return}
+ requestAnimationFrame(loop);
+}
+start.onclick=reset;play.onclick=reset;
+</script>
+</body>
+</html>
