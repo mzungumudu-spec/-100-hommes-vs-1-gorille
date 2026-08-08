@@ -32,9 +32,9 @@ overflow:hidden;
 
 h1{
 
-margin:10px 0 3px;
+margin:8px 0 2px;
 
-font-size:26px;
+font-size:24px;
 
 }
 
@@ -42,7 +42,7 @@ font-size:26px;
 
 color:#9ca3af;
 
-font-size:14px;
+font-size:13px;
 
 }
 
@@ -52,11 +52,11 @@ display:flex;
 
 justify-content:center;
 
-gap:8px;
+gap:6px;
 
 flex-wrap:wrap;
 
-margin:7px;
+margin:6px;
 
 }
 
@@ -64,11 +64,11 @@ margin:7px;
 
 background:#17202a;
 
-padding:7px 10px;
+padding:6px 9px;
 
-border-radius:9px;
+border-radius:8px;
 
-font-size:14px;
+font-size:13px;
 
 font-weight:bold;
 
@@ -80,9 +80,9 @@ width:80%;
 
 max-width:600px;
 
-height:21px;
+height:19px;
 
-margin:7px auto;
+margin:6px auto;
 
 background:#292929;
 
@@ -102,7 +102,7 @@ width:100%;
 
 background:#22c55e;
 
-transition:width .2s,background .2s;
+transition:width .2s;
 
 }
 
@@ -112,21 +112,21 @@ position:relative;
 
 width:96%;
 
-max-width:1100px;
+max-width:1050px;
 
-height:540px;
+height:500px;
 
 margin:auto;
 
 overflow:hidden;
 
-border:4px solid #4b5563;
+border:3px solid #4b5563;
 
-border-radius:20px;
+border-radius:18px;
 
-background:#111;
+background:#17231a;
 
-box-shadow:0 0 35px #000;
+box-shadow:0 0 25px #000;
 
 }
 
@@ -134,33 +134,19 @@ box-shadow:0 0 35px #000;
 
 position:absolute;
 
-width:180%;
+width:160%;
 
-height:180%;
+height:160%;
 
-left:-40%;
+left:-30%;
 
-top:-40%;
+top:-30%;
 
 background:
 
-radial-gradient(circle,#496742 0%,#29402c 45%,#111a14 100%);
+radial-gradient(circle,#496742,#29402c 48%,#111a14 100%);
 
-transition:transform .18s ease-out;
-
-}
-
-.world:after{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-box-shadow:inset 0 0 100px #0009;
-
-pointer-events:none;
+will-change:transform;
 
 }
 
@@ -172,13 +158,13 @@ left:50%;
 
 top:50%;
 
-width:80%;
+width:78%;
 
-height:75%;
+height:72%;
 
 transform:translate(-50%,-50%);
 
-border:3px solid #ffffff22;
+border:2px solid #ffffff20;
 
 border-radius:50%;
 
@@ -188,21 +174,19 @@ border-radius:50%;
 
 position:absolute;
 
-font-size:82px;
+font-size:76px;
 
 z-index:20;
 
 transform:translate(-50%,-50%);
 
-transition:left .12s linear,top .12s linear;
-
-filter:drop-shadow(0 8px 5px #0009);
+will-change:left,top,transform;
 
 }
 
 .gorilla.rage{
 
-animation:rage .22s infinite alternate;
+animation:rage .3s infinite alternate;
 
 }
 
@@ -210,7 +194,7 @@ animation:rage .22s infinite alternate;
 
 from{transform:translate(-50%,-50%) scale(1)}
 
-to{transform:translate(-50%,-50%) scale(1.15)}
+to{transform:translate(-50%,-50%) scale(1.08)}
 
 }
 
@@ -218,43 +202,29 @@ to{transform:translate(-50%,-50%) scale(1.15)}
 
 position:absolute;
 
-font-size:24px;
+font-size:23px;
 
 z-index:10;
 
 transform:translate(-50%,-50%);
 
-transition:left .1s linear,top .1s linear;
-
-filter:drop-shadow(0 3px 2px #0009);
+will-change:left,top;
 
 }
 
-.man.fast{font-size:22px}
+.man.fast{font-size:21px}
 
-.man.strong{font-size:29px}
+.man.strong{font-size:27px}
 
 .man.attack{
 
-animation:punch .2s;
+animation:attack .18s;
 
 }
 
-@keyframes punch{
+@keyframes attack{
 
-50%{transform:translate(-50%,-50%) scale(1.5)}
-
-}
-
-.man.hit{
-
-animation:hit .2s;
-
-}
-
-@keyframes hit{
-
-50%{filter:brightness(2)}
+50%{transform:translate(-50%,-50%) scale(1.35)}
 
 }
 
@@ -262,9 +232,9 @@ animation:hit .2s;
 
 opacity:0;
 
-transform:translate(-50%,-50%) rotate(90deg) scale(.2);
+transform:translate(-50%,-50%) scale(.3);
 
-transition:opacity .5s,transform .5s;
+transition:opacity .35s;
 
 }
 
@@ -272,23 +242,23 @@ transition:opacity .5s,transform .5s;
 
 position:absolute;
 
-z-index:40;
+z-index:30;
 
-font-size:30px;
+font-size:25px;
 
 pointer-events:none;
 
-animation:impact .45s forwards;
+animation:effect .3s forwards;
 
 }
 
-@keyframes impact{
+@keyframes effect{
 
 0%{
 
 opacity:1;
 
-transform:translate(-50%,-50%) scale(.4);
+transform:translate(-50%,-50%) scale(.5);
 
 }
 
@@ -296,45 +266,15 @@ transform:translate(-50%,-50%) scale(.4);
 
 opacity:0;
 
-transform:translate(-50%,-100%) scale(1.5);
+transform:translate(-50%,-80%) scale(1.2);
 
 }
-
-}
-
-.flash{
-
-position:absolute;
-
-inset:0;
-
-z-index:45;
-
-background:white;
-
-opacity:0;
-
-pointer-events:none;
-
-}
-
-.flash.active{
-
-animation:flash .15s;
-
-}
-
-@keyframes flash{
-
-0%{opacity:.45}
-
-100%{opacity:0}
 
 }
 
 .controls{
 
-margin:7px;
+margin:6px;
 
 }
 
@@ -342,17 +282,15 @@ button{
 
 border:0;
 
-border-radius:11px;
+border-radius:10px;
 
-padding:11px 15px;
+padding:10px 14px;
 
 margin:3px;
 
-font-size:15px;
+font-size:14px;
 
 font-weight:bold;
-
-cursor:pointer;
 
 }
 
@@ -380,27 +318,21 @@ color:#111;
 
 }
 
-button:active{
-
-transform:scale(.94);
-
-}
-
 #status{
 
-min-height:27px;
+min-height:24px;
 
-font-size:17px;
+font-size:16px;
 
 font-weight:bold;
 
-margin:5px;
+margin:4px;
 
 }
 
 .legend{
 
-font-size:12px;
+font-size:11px;
 
 color:#cbd5e1;
 
@@ -436,21 +368,19 @@ background:#111827;
 
 border:2px solid #6b7280;
 
-border-radius:20px;
+border-radius:18px;
 
-padding:24px;
+padding:22px;
 
 width:85%;
 
-max-width:430px;
-
-box-shadow:0 0 35px #000;
+max-width:420px;
 
 }
 
 .result h2{
 
-font-size:29px;
+font-size:28px;
 
 margin:5px;
 
@@ -480,7 +410,7 @@ color:#d1d5db;
 
 <div class="stat">
 
-🧑 Vivants :
+🧑 Vivants:
 
 <b id="menCount">100</b>
 
@@ -488,7 +418,7 @@ color:#d1d5db;
 
 <div class="stat">
 
-⚔️ Attaquants :
+⚔️ Attaquants:
 
 <b id="attackers">0</b>
 
@@ -496,7 +426,7 @@ color:#d1d5db;
 
 <div class="stat">
 
-🦍 Vie :
+🦍 Vie:
 
 <b id="hpText">1000</b>
 
@@ -504,7 +434,7 @@ color:#d1d5db;
 
 <div class="stat">
 
-🔥 Rage :
+🔥 Rage:
 
 <b id="rageText">0%</b>
 
@@ -531,8 +461,6 @@ color:#d1d5db;
 </div>
 
 </div>
-
-<div id="flash" class="flash"></div>
 
 <div id="overlay" class="overlay">
 
@@ -590,8 +518,6 @@ Prêt pour la bataille.
 
 <script>
 
-const viewport=document.getElementById("viewport");
-
 const world=document.getElementById("world");
 
 const gorilla=document.getElementById("gorilla");
@@ -607,8 +533,6 @@ const rageText=document.getElementById("rageText");
 const health=document.getElementById("health");
 
 const status=document.getElementById("status");
-
-const flash=document.getElementById("flash");
 
 const overlay=document.getElementById("overlay");
 
@@ -632,9 +556,13 @@ const MAX_HP=1000;
 
 let totalKills=0;
 
-let lastMenAttack=0;
+let lastAttack=0;
 
 let lastGorillaAttack=0;
+
+let lastLogic=0;
+
+let lastCamera=0;
 
 function random(min,max){
 
@@ -652,7 +580,7 @@ return Math.sqrt(x*x+y*y);
 
 }
 
-function aliveMen(){
+function getAlive(){
 
 return men.filter(function(m){
 
@@ -752,27 +680,31 @@ gorilla.style.left=gorillaX+"%";
 
 gorilla.style.top=gorillaY+"%";
 
-men.forEach(function(m){
+for(let i=0;i<men.length;i++){
 
-if(!m.alive)return;
+let m=men[i];
+
+if(!m.alive)continue;
 
 m.el.style.left=m.x+"%";
 
 m.el.style.top=m.y+"%";
 
-});
+}
 
 }
 
 function moveMen(){
 
-let alive=aliveMen();
+let alive=getAlive();
 
-alive.forEach(function(m,index){
+let count=alive.length;
 
-let angle=
+for(let i=0;i<count;i++){
 
-(Math.PI*2/Math.max(1,alive.length))*index;
+let m=alive[i];
+
+let angle=(Math.PI*2/count)*i;
 
 let radius=4.7;
 
@@ -796,9 +728,9 @@ let d=Math.sqrt(dx*dx+dy*dy);
 
 if(d>.5){
 
-m.x+=(dx/d)*m.speed*.32;
+m.x+=(dx/d)*m.speed*.35;
 
-m.y+=(dy/d)*m.speed*.32;
+m.y+=(dy/d)*m.speed*.35;
 
 }
 
@@ -806,21 +738,23 @@ m.x=Math.max(2,Math.min(98,m.x));
 
 m.y=Math.max(4,Math.min(96,m.y));
 
-});
+}
 
 }
 
 function moveGorilla(){
 
-let alive=aliveMen();
+let alive=getAlive();
 
 if(alive.length===0)return;
 
 let target=null;
 
-let best=Infinity;
+let best=9999;
 
-alive.forEach(function(m){
+for(let i=0;i<alive.length;i++){
+
+let m=alive[i];
 
 let d=distance(
 
@@ -842,7 +776,7 @@ target=m;
 
 }
 
-});
+}
 
 if(!target)return;
 
@@ -854,7 +788,7 @@ let d=Math.sqrt(dx*dx+dy*dy);
 
 if(d>4){
 
-let speed=rage?.34:.20;
+let speed=rage?.32:.19;
 
 gorillaX+=(dx/d)*speed;
 
@@ -868,13 +802,13 @@ gorillaY=Math.max(7,Math.min(93,gorillaY));
 
 }
 
-function createEffect(x,y,text){
+function createEffect(x,y){
 
 let e=document.createElement("div");
 
 e.className="effect";
 
-e.textContent=text;
+e.textContent="💥";
 
 e.style.left=x+"%";
 
@@ -886,17 +820,7 @@ setTimeout(function(){
 
 e.remove();
 
-},450);
-
-}
-
-function screenFlash(){
-
-flash.classList.remove("active");
-
-void flash.offsetWidth;
-
-flash.classList.add("active");
+},300);
 
 }
 
@@ -904,17 +828,19 @@ function menAttack(){
 
 let now=Date.now();
 
-if(now-lastMenAttack<180)return;
+if(now-lastAttack<220)return;
 
-lastMenAttack=now;
+lastAttack=now;
 
-let alive=aliveMen();
+let alive=getAlive();
 
 let damage=0;
 
 let attackers=0;
 
-alive.forEach(function(m){
+for(let i=0;i<alive.length;i++){
+
+let m=alive[i];
 
 let d=distance(
 
@@ -934,27 +860,29 @@ attackers++;
 
 damage+=m.damage;
 
+if(attackers<8){
+
 m.el.classList.add("attack");
 
 setTimeout(function(){
 
 m.el.classList.remove("attack");
 
-},200);
+},180);
 
 createEffect(
 
-gorillaX+random(-3,3),
+gorillaX+random(-2,2),
 
-gorillaY+random(-3,3),
-
-"💥"
+gorillaY+random(-2,2)
 
 );
 
 }
 
-});
+}
+
+}
 
 if(attackers>0){
 
@@ -974,15 +902,19 @@ function gorillaAttack(){
 
 let now=Date.now();
 
-if(now-lastGorillaAttack<500)return;
+if(now-lastGorillaAttack<600)return;
 
 lastGorillaAttack=now;
 
-let alive=aliveMen();
+let alive=getAlive();
 
-let nearby=alive.filter(function(m){
+let nearby=[];
 
-return distance(
+for(let i=0;i<alive.length;i++){
+
+let m=alive[i];
+
+if(distance(
 
 m.x,
 
@@ -992,59 +924,31 @@ gorillaX,
 
 gorillaY
 
-)<6.5;
+)<6.5){
 
-});
+nearby.push(m);
+
+}
+
+}
 
 if(nearby.length===0)return;
 
-let victims=nearby
+let number=rage?3:1;
 
-.sort(function(){
+for(let i=0;i<number;i++){
 
-return Math.random()-.5;
+if(nearby.length===0)break;
 
-})
+let index=
 
-.slice(0,rage?3:1);
+Math.floor(Math.random()*nearby.length);
 
-gorilla.style.transform=
+let m=nearby.splice(index,1)[0];
 
-"translate(-50%,-50%) scale(1.2)";
+m.health-=rage?90:65;
 
-screenFlash();
-
-setTimeout(function(){
-
-gorilla.style.transform=
-
-"translate(-50%,-50%) scale(1)";
-
-},180);
-
-victims.forEach(function(m){
-
-let damage=rage?90:65;
-
-m.health-=damage;
-
-m.el.classList.add("hit");
-
-createEffect(
-
-m.x,
-
-m.y,
-
-"💥"
-
-);
-
-setTimeout(function(){
-
-m.el.classList.remove("hit");
-
-},250);
+createEffect(m.x,m.y);
 
 if(m.health<=0){
 
@@ -1055,30 +959,6 @@ m.el.classList.add("dead");
 totalKills++;
 
 }
-
-});
-
-}
-
-function updateRage(){
-
-let percent=
-
-Math.round((1-gorillaHP/MAX_HP)*100);
-
-percent=Math.max(0,Math.min(100,percent));
-
-rageText.textContent=percent+"%";
-
-if(percent>=60&&!rage){
-
-rage=true;
-
-gorilla.classList.add("rage");
-
-status.textContent=
-
-"🔥 LE GORILLE ENTRE EN RAGE !";
 
 }
 
@@ -1108,69 +988,73 @@ health.style.background="#22c55e";
 
 }
 
-updateRage();
+let ragePercent=
+
+Math.round((1-gorillaHP/MAX_HP)*100);
+
+ragePercent=
+
+Math.max(0,Math.min(100,ragePercent));
+
+rageText.textContent=ragePercent+"%";
+
+if(ragePercent>=60&&!rage){
+
+rage=true;
+
+gorilla.classList.add("rage");
+
+status.textContent=
+
+"🔥 LE GORILLE ENTRE EN RAGE !";
+
+}
 
 }
 
 function updateStats(){
 
-let alive=aliveMen();
+let alive=getAlive();
 
 menCount.textContent=alive.length;
 
-attackersText.textContent=
+let attackers=0;
 
-alive.filter(function(m){
+for(let i=0;i<alive.length;i++){
 
-return distance(
+if(distance(
 
-m.x,
+alive[i].x,
 
-m.y,
+alive[i].y,
 
 gorillaX,
 
 gorillaY
 
-)<7;
+)<7){
 
-}).length;
+attackers++;
+
+}
+
+}
+
+attackersText.textContent=attackers;
 
 }
 
 function updateCamera(){
 
-/*
-
-La caméra regarde légèrement
-
-vers le gorille et l'action.
-
-*/
-
-let cameraX=
-
-50+(gorillaX-50)*0.55;
-
-let cameraY=
-
-50+(gorillaY-50)*0.55;
-
 let offsetX=
 
-(cameraX-50)*0.65;
+(gorillaX-50)*.55;
 
 let offsetY=
 
-(cameraY-50)*0.65;
+(gorillaY-50)*.55;
 
-let zoom=1;
-
-if(rage){
-
-zoom=1.08;
-
-}
+let zoom=rage?1.05:1;
 
 world.style.transform=
 
@@ -1202,7 +1086,7 @@ overlay.classList.add("show");
 
 status.textContent=
 
-"🏆 Les hommes remportent la bataille !";
+"🏆 Les hommes gagnent !";
 
 }
 
@@ -1224,13 +1108,15 @@ overlay.classList.add("show");
 
 status.textContent=
 
-"🦍 Le gorille remporte la bataille !";
+"🦍 Le gorille gagne !";
 
 }
 
-function gameLoop(){
+function gameLoop(time){
 
 if(running){
+
+if(time-lastLogic>35){
 
 moveMen();
 
@@ -1246,7 +1132,17 @@ updateStats();
 
 updateHealth();
 
+lastLogic=time;
+
+}
+
+if(time-lastCamera>80){
+
 updateCamera();
+
+lastCamera=time;
+
+}
 
 if(gorillaHP<=0){
 
@@ -1254,7 +1150,7 @@ finishMen();
 
 }
 
-if(aliveMen().length===0){
+if(getAlive().length===0){
 
 finishGorilla();
 
@@ -1342,7 +1238,7 @@ document.getElementById("resultReset")
 
 resetGame();
 
-gameLoop();
+requestAnimationFrame(gameLoop);
 
 </script>
 
