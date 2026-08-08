@@ -6,13 +6,19 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>Bagarre Hommes Gorille</title>
+<title>100 Hommes vs 1 Gorille</title>
 
 <style>
 
-*{box-sizing:border-box}
+*{
+
+box-sizing:border-box;
+
+-webkit-tap-highlight-color:transparent;
+
+}
 
 body{
 
@@ -28,13 +34,15 @@ text-align:center;
 
 overflow:hidden;
 
+touch-action:none;
+
 }
 
 h1{
 
-margin:8px 0 2px;
+margin:7px 0 2px;
 
-font-size:24px;
+font-size:23px;
 
 }
 
@@ -42,7 +50,7 @@ font-size:24px;
 
 color:#9ca3af;
 
-font-size:13px;
+font-size:12px;
 
 }
 
@@ -52,11 +60,11 @@ display:flex;
 
 justify-content:center;
 
-gap:6px;
+gap:5px;
 
 flex-wrap:wrap;
 
-margin:6px;
+margin:5px;
 
 }
 
@@ -64,11 +72,11 @@ margin:6px;
 
 background:#17202a;
 
-padding:6px 9px;
+padding:5px 8px;
 
 border-radius:8px;
 
-font-size:13px;
+font-size:12px;
 
 font-weight:bold;
 
@@ -76,13 +84,13 @@ font-weight:bold;
 
 .healthBox{
 
-width:80%;
+width:82%;
 
 max-width:600px;
 
-height:19px;
+height:18px;
 
-margin:6px auto;
+margin:5px auto;
 
 background:#292929;
 
@@ -112,9 +120,11 @@ position:relative;
 
 width:96%;
 
-max-width:1050px;
+height:55vh;
 
-height:500px;
+min-height:360px;
+
+max-height:560px;
 
 margin:auto;
 
@@ -164,7 +174,7 @@ height:72%;
 
 transform:translate(-50%,-50%);
 
-border:2px solid #ffffff20;
+border:2px solid #ffffff22;
 
 border-radius:50%;
 
@@ -174,7 +184,7 @@ border-radius:50%;
 
 position:absolute;
 
-font-size:76px;
+font-size:88px;
 
 z-index:20;
 
@@ -186,15 +196,23 @@ will-change:left,top,transform;
 
 .gorilla.rage{
 
-animation:rage .3s infinite alternate;
+animation:rage .28s infinite alternate;
 
 }
 
 @keyframes rage{
 
-from{transform:translate(-50%,-50%) scale(1)}
+from{
 
-to{transform:translate(-50%,-50%) scale(1.08)}
+transform:translate(-50%,-50%) scale(1);
+
+}
+
+to{
+
+transform:translate(-50%,-50%) scale(1.1);
+
+}
 
 }
 
@@ -202,7 +220,7 @@ to{transform:translate(-50%,-50%) scale(1.08)}
 
 position:absolute;
 
-font-size:23px;
+font-size:25px;
 
 z-index:10;
 
@@ -212,9 +230,17 @@ will-change:left,top;
 
 }
 
-.man.fast{font-size:21px}
+.man.fast{
 
-.man.strong{font-size:27px}
+font-size:23px;
+
+}
+
+.man.strong{
+
+font-size:29px;
+
+}
 
 .man.attack{
 
@@ -224,7 +250,11 @@ animation:attack .18s;
 
 @keyframes attack{
 
-50%{transform:translate(-50%,-50%) scale(1.35)}
+50%{
+
+transform:translate(-50%,-50%) scale(1.35);
+
+}
 
 }
 
@@ -232,7 +262,7 @@ animation:attack .18s;
 
 opacity:0;
 
-transform:translate(-50%,-50%) scale(.3);
+transform:translate(-50%,-50%) scale(.25);
 
 transition:opacity .35s;
 
@@ -244,7 +274,7 @@ position:absolute;
 
 z-index:30;
 
-font-size:25px;
+font-size:27px;
 
 pointer-events:none;
 
@@ -274,7 +304,7 @@ transform:translate(-50%,-80%) scale(1.2);
 
 .controls{
 
-margin:6px;
+margin:5px;
 
 }
 
@@ -284,13 +314,21 @@ border:0;
 
 border-radius:10px;
 
-padding:10px 14px;
+padding:10px 13px;
 
 margin:3px;
 
 font-size:14px;
 
 font-weight:bold;
+
+cursor:pointer;
+
+}
+
+button:active{
+
+transform:scale(.92);
 
 }
 
@@ -318,15 +356,95 @@ color:#111;
 
 }
 
-#status{
+.cameraControls{
 
-min-height:24px;
+display:grid;
+
+grid-template-columns:45px 45px 45px;
+
+grid-template-rows:42px 42px;
+
+justify-content:center;
+
+gap:3px;
+
+margin:3px;
+
+}
+
+.cameraControls button{
+
+margin:0;
+
+padding:0;
+
+font-size:20px;
+
+background:#263241;
+
+color:white;
+
+border:1px solid #4b5563;
+
+}
+
+.up{
+
+grid-column:2;
+
+grid-row:1;
+
+}
+
+.left{
+
+grid-column:1;
+
+grid-row:2;
+
+}
+
+.down{
+
+grid-column:2;
+
+grid-row:2;
+
+}
+
+.right{
+
+grid-column:3;
+
+grid-row:2;
+
+}
+
+.zoomControls{
+
+margin:3px;
+
+}
+
+.zoomControls button{
+
+background:#334155;
+
+color:white;
 
 font-size:16px;
 
+}
+
+#status{
+
+min-height:22px;
+
+font-size:15px;
+
 font-weight:bold;
 
-margin:4px;
+margin:3px;
 
 }
 
@@ -398,11 +516,11 @@ color:#d1d5db;
 
 <body>
 
-<h1>🦍 BAGARRE HOMMES GORILLE 🧑‍🤝‍🧑</h1>
+<h1>🦍 100 HOMMES VS 1 GORILLE 🧑‍🤝‍🧑</h1>
 
 <div class="subtitle">
 
-100 hommes contre 1 gorille
+Le gorille possède un léger avantage
 
 </div>
 
@@ -428,7 +546,7 @@ color:#d1d5db;
 
 🦍 Vie:
 
-<b id="hpText">1000</b>
+<b id="hpText">1300</b>
 
 </div>
 
@@ -510,6 +628,28 @@ color:#d1d5db;
 
 </div>
 
+<div class="cameraControls">
+
+<button class="up" id="camUp">⬆️</button>
+
+<button class="left" id="camLeft">⬅️</button>
+
+<button class="down" id="camDown">⬇️</button>
+
+<button class="right" id="camRight">➡️</button>
+
+</div>
+
+<div class="zoomControls">
+
+<button id="zoomOut">➖</button>
+
+<button id="zoomReset">🔍</button>
+
+<button id="zoomIn">➕</button>
+
+</div>
+
 <div id="status">
 
 Prêt pour la bataille.
@@ -550,19 +690,25 @@ let gorillaX=50;
 
 let gorillaY=50;
 
-let gorillaHP=1000;
+const MAX_HP=1300;
 
-const MAX_HP=1000;
+let gorillaHP=MAX_HP;
 
 let totalKills=0;
 
-let lastAttack=0;
+let lastMenAttack=0;
 
 let lastGorillaAttack=0;
 
 let lastLogic=0;
 
 let lastCamera=0;
+
+let cameraX=0;
+
+let cameraY=0;
+
+let zoom=1;
 
 function random(min,max){
 
@@ -654,9 +800,9 @@ speed:type==="fast"?.55:
 
 type==="strong"?.27:.38,
 
-damage:type==="strong"?3.2:
+damage:type==="strong"?2.7:
 
-type==="fast"?1.4:1.9
+type==="fast"?1.2:1.6
 
 };
 
@@ -700,13 +846,15 @@ let alive=getAlive();
 
 let count=alive.length;
 
+if(count===0)return;
+
 for(let i=0;i<count;i++){
 
 let m=alive[i];
 
 let angle=(Math.PI*2/count)*i;
 
-let radius=4.7;
+let radius=4.8;
 
 let targetX=
 
@@ -728,9 +876,9 @@ let d=Math.sqrt(dx*dx+dy*dy);
 
 if(d>.5){
 
-m.x+=(dx/d)*m.speed*.35;
+m.x+=(dx/d)*m.speed*.34;
 
-m.y+=(dy/d)*m.speed*.35;
+m.y+=(dy/d)*m.speed*.34;
 
 }
 
@@ -788,7 +936,7 @@ let d=Math.sqrt(dx*dx+dy*dy);
 
 if(d>4){
 
-let speed=rage?.32:.19;
+let speed=rage?.38:.23;
 
 gorillaX+=(dx/d)*speed;
 
@@ -828,9 +976,9 @@ function menAttack(){
 
 let now=Date.now();
 
-if(now-lastAttack<220)return;
+if(now-lastMenAttack<240)return;
 
-lastAttack=now;
+lastMenAttack=now;
 
 let alive=getAlive();
 
@@ -860,7 +1008,7 @@ attackers++;
 
 damage+=m.damage;
 
-if(attackers<8){
+if(attackers<=6){
 
 m.el.classList.add("attack");
 
@@ -902,7 +1050,7 @@ function gorillaAttack(){
 
 let now=Date.now();
 
-if(now-lastGorillaAttack<600)return;
+if(now-lastGorillaAttack<520)return;
 
 lastGorillaAttack=now;
 
@@ -924,7 +1072,7 @@ gorillaX,
 
 gorillaY
 
-)<6.5){
+)<6.8){
 
 nearby.push(m);
 
@@ -934,7 +1082,7 @@ nearby.push(m);
 
 if(nearby.length===0)return;
 
-let number=rage?3:1;
+let number=rage?4:2;
 
 for(let i=0;i<number;i++){
 
@@ -946,7 +1094,7 @@ Math.floor(Math.random()*nearby.length);
 
 let m=nearby.splice(index,1)[0];
 
-m.health-=rage?90:65;
+m.health-=rage?110:80;
 
 createEffect(m.x,m.y);
 
@@ -998,7 +1146,7 @@ Math.max(0,Math.min(100,ragePercent));
 
 rageText.textContent=ragePercent+"%";
 
-if(ragePercent>=60&&!rage){
+if(ragePercent>=55&&!rage){
 
 rage=true;
 
@@ -1046,21 +1194,33 @@ attackersText.textContent=attackers;
 
 function updateCamera(){
 
-let offsetX=
+let autoX=(gorillaX-50)*.45;
 
-(gorillaX-50)*.55;
+let autoY=(gorillaY-50)*.45;
 
-let offsetY=
+let finalX=autoX+cameraX;
 
-(gorillaY-50)*.55;
-
-let zoom=rage?1.05:1;
+let finalY=autoY+cameraY;
 
 world.style.transform=
 
-"translate("+(-offsetX)+"%,"+
+"translate("+(-finalX)+"%,"+
 
-(-offsetY)+"%) scale("+zoom+")";
+(-finalY)+"%) scale("+zoom+")";
+
+}
+
+function moveCamera(x,y){
+
+cameraX+=x;
+
+cameraY+=y;
+
+cameraX=Math.max(-25,Math.min(25,cameraX));
+
+cameraY=Math.max(-25,Math.min(25,cameraY));
+
+updateCamera();
 
 }
 
@@ -1108,7 +1268,7 @@ overlay.classList.add("show");
 
 status.textContent=
 
-"🦍 Le gorille gagne !";
+"🦍 LE GORILLE GAGNE !";
 
 }
 
@@ -1116,7 +1276,7 @@ function gameLoop(time){
 
 if(running){
 
-if(time-lastLogic>35){
+if(time-lastLogic>40){
 
 moveMen();
 
@@ -1136,7 +1296,7 @@ lastLogic=time;
 
 }
 
-if(time-lastCamera>80){
+if(time-lastCamera>100){
 
 updateCamera();
 
@@ -1173,6 +1333,12 @@ gorillaHP=MAX_HP;
 gorillaX=50;
 
 gorillaY=50;
+
+cameraX=0;
+
+cameraY=0;
+
+zoom=1;
 
 totalKills=0;
 
@@ -1235,6 +1401,72 @@ document.getElementById("reset")
 document.getElementById("resultReset")
 
 .addEventListener("click",resetGame);
+
+document.getElementById("camUp")
+
+.addEventListener("click",function(){
+
+moveCamera(0,-5);
+
+});
+
+document.getElementById("camDown")
+
+.addEventListener("click",function(){
+
+moveCamera(0,5);
+
+});
+
+document.getElementById("camLeft")
+
+.addEventListener("click",function(){
+
+moveCamera(-5,0);
+
+});
+
+document.getElementById("camRight")
+
+.addEventListener("click",function(){
+
+moveCamera(5,0);
+
+});
+
+document.getElementById("zoomIn")
+
+.addEventListener("click",function(){
+
+zoom=Math.min(1.4,zoom+.1);
+
+updateCamera();
+
+});
+
+document.getElementById("zoomOut")
+
+.addEventListener("click",function(){
+
+zoom=Math.max(.8,zoom-.1);
+
+updateCamera();
+
+});
+
+document.getElementById("zoomReset")
+
+.addEventListener("click",function(){
+
+zoom=1;
+
+cameraX=0;
+
+cameraY=0;
+
+updateCamera();
+
+});
 
 resetGame();
 
