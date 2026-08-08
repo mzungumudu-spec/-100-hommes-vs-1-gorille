@@ -1,521 +1,483 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>100 Hommes vs 1 Gorille</title>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
+<\!DOCTYPE html\>
+<html lang="fr"\>
+<head\>
+<meta charset="UTF\-8"\>
+<meta name="viewport" content="width=device\-width, initial\-scale=1\.0"\>
+<title\>100 Hommes vs 1 Gorille</title\>
+<style\>
+\* \{
+  box\-sizing: border\-box;
+\}
+body \{
   margin: 0;
-  background: #101820;
+  background: \#101820;
   color: white;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  overflow-x: hidden;
-}
-
-h1 {
+  font\-family: Arial, sans\-serif;
+  text\-align: center;
+\}
+h1 \{
   margin: 15px 0 5px;
-  font-size: 28px;
-}
-
-.subtitle {
-  color: #aaa;
-  margin-bottom: 10px;
-}
-
-.stats {
+  font\-size: 28px;
+\}
+\.subtitle \{
+  color: \#aaa;
+  margin\-bottom: 10px;
+\}
+\.stats \{
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  font-size: 18px;
+  justify\-content: center;
+  gap: 25px;
+  flex\-wrap: wrap;
+  font\-size: 18px;
   margin: 10px;
-}
-
-.arena {
+\}
+\.arena \{
   position: relative;
   width: 95%;
-  max-width: 1001px;
-  height: 500px;
+  max\-width: 1000px;
+  height: 520px;
   margin: auto;
   overflow: hidden;
-  border: 4px solid #555;
-  border-radius: 18px;
+  border: 4px solid \#555;
+  border\-radius: 18px;
   background:
-    radial-gradient(circle at 50% 40%, #354b38 0%, #17231b 70%);
-  box-shadow: 0 0 30px #000;
-}
-
-.gorilla {
+    radial\-gradient\(circle at 50% 50%, \#3d583e, \#17231b 75%\);
+  box\-shadow: 0 0 30px \#000;
+\}
+/\* GORILLE \*/
+\.gorilla \{
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 90px;
-  transition: left .25s, top .25s;
-  z-index: 5;
-}
-
-.gorilla.hit {
-  animation: hit .25s;
-}
-
-.gorilla.attack {
-  animation: gorillaAttack .35s;
-}
-
-@keyframes hit {
-  50% {
-    transform: translate(-50%, -50%) scale(1.3);
-    filter: brightness(2);
-  }
-}
-
-@keyframes gorillaAttack {
-  50% {
-    transform: translate(-50%, -50%) scale(1.25);
-  }
-}
-
-.man {
+  transform: translate\(\-50%, \-50%\);
+  font\-size: 85px;
+  z\-index: 5;
+  transition:
+    left \.25s linear,
+    top \.25s linear;
+\}
+\.gorilla\.walk \{
+  animation: gorillaWalk \.35s infinite alternate;
+\}
+@keyframes gorillaWalk \{
+  from \{
+    transform: translate\(\-50%, \-50%\) rotate\(\-3deg\);
+  \}
+  to \{
+    transform: translate\(\-50%, \-50%\) rotate\(3deg\);
+  \}
+\}
+/\* HOMMES \*/
+\.man \{
   position: absolute;
-  font-size: 28px;
-  transition: left .35s, top .35s, opacity .3s;
-  z-index: 3;
-}
-
-.man.attacking {
-  animation: manAttack .3s;
-}
-
-@keyframes manAttack {
-  50% {
-    transform: scale(1.4);
-  }
-}
-
-.man.dead {
+  font\-size: 27px;
+  z\-index: 3;
+  transition:
+    left \.25s linear,
+    top \.25s linear;
+  user\-select: none;
+\}
+\.man\.walk \{
+  animation: manWalk \.25s infinite alternate;
+\}
+@keyframes manWalk \{
+  from \{
+    transform: translateY\(0\);
+  \}
+  to \{
+    transform: translateY\(\-4px\);
+  \}
+\}
+\.man\.dead \{
   opacity: 0;
-  transform: rotate(90deg) scale(.3);
-}
-
-.healthBox {
+  transform:
+    rotate\(90deg\)
+    scale\(\.3\);
+  transition:
+    opacity \.4s,
+    transform \.4s;
+\}
+/\* BARRE DE VIE \*/
+\.healthBox \{
   width: 80%;
-  max-width: 600px;
+  max\-width: 600px;
   height: 25px;
-  background: #333;
-  border-radius: 20px;
+  background: \#333;
+  border\-radius: 20px;
   margin: 10px auto;
   overflow: hidden;
-  border: 2px solid #777;
-}
-
-.health {
+  border: 2px solid \#777;
+\}
+\.health \{
   width: 100%;
   height: 100%;
-  background: #22c55e;
-  transition: width .25s, background .25s;
-}
-
-.controls {
+  background: \#22c55e;
+  transition:
+    width \.25s,
+    background \.25s;
+\}
+/\* BOUTONS \*/
+\.controls \{
   margin: 15px auto;
-}
-
-button {
+\}
+button \{
   border: 0;
-  border-radius: 12px;
+  border\-radius: 12px;
   padding: 14px 22px;
   margin: 5px;
-  font-size: 17px;
-  font-weight: bold;
+  font\-size: 17px;
+  font\-weight: bold;
   cursor: pointer;
-}
-
-#attack {
-  background: #dc2626;
+\}
+\#start \{
+  background: \#16a34a;
   color: white;
-}
-
-#attack:active {
-  transform: scale(.94);
-}
-
-#reset {
-  background: #ddd;
-  color: #111;
-}
-
-#status {
-  min-height: 35px;
-  font-size: 19px;
+\}
+\#reset \{
+  background: \#ddd;
+  color: \#111;
+\}
+\#status \{
+  min\-height: 35px;
+  font\-size: 19px;
   margin: 10px;
-  font-weight: bold;
-}
-
-.log {
-  width: 90%;
-  max-width: 700px;
-  margin: 10px auto;
-  height: 90px;
-  overflow-y: auto;
-  background: #080d11;
-  border-radius: 10px;
-  padding: 8px;
-  text-align: left;
-  font-size: 14px;
-}
-
-.log div {
-  margin: 3px;
-  color: #ccc;
-}
-</style>
-</head>
-
-<body>
-
-<h1>🦍 100 HOMMES VS 1 GORILLE 🧑‍🤝‍🧑</h1>
-
-<div class="subtitle">
-Simulation de combat
-</div>
-
-<div class="stats">
-  <div>🧑 Hommes : <b id="menCount">100</b></div>
-  <div>🦍 Vie du gorille : <b id="gorillaHPText">1000</b></div>
-</div>
-
-<div class="healthBox">
-  <div id="health" class="health"></div>
-</div>
-
-<div id="arena" class="arena">
-
-  <div id="gorilla" class="gorilla">
+  font\-weight: bold;
+\}
+</style\>
+</head\>
+<body\>
+<h1\>🦍 100 HOMMES VS 1 GORILLE 🧑‍🤝‍🧑</h1\>
+<div class="subtitle"\>
+Les hommes poursuivent le gorille dans l'arène
+</div\>
+<div class="stats"\>
+  <div\>
+    🧑 Hommes :
+    <b id="menCount"\>100</b\>
+  </div\>
+  <div\>
+    🦍 Vie :
+    <b id="hpText"\>1000</b\>
+  </div\>
+</div\>
+<div class="healthBox"\>
+  <div id="health" class="health"\></div\>
+</div\>
+<div id="arena" class="arena"\>
+  <div id="gorilla" class="gorilla"\>
     🦍
-  </div>
-
-</div>
-
-<div class="controls">
-
-  <button id="attack">
-    ⚔️ ATTAQUER
-  </button>
-
-  <button id="reset">
+  </div\>
+</div\>
+<div class="controls"\>
+  <button id="start"\>
+    ▶️ LANCER LE COMBAT
+  </button\>
+  <button id="reset"\>
     🔄 RECOMMENCER
-  </button>
-
-</div>
-
-<div id="status">
-  Le combat va commencer !
-</div>
-
-<div id="log" class="log"></div>
-
-<script>
-
-const arena = document.getElementById("arena");
-const gorilla = document.getElementById("gorilla");
-const menCount = document.getElementById("menCount");
-const health = document.getElementById("health");
-const hpText = document.getElementById("gorillaHPText");
-const status = document.getElementById("status");
-const log = document.getElementById("log");
-
-let men = [];
+  </button\>
+</div\>
+<div id="status"\>
+  Appuie sur « LANCER LE COMBAT »\.
+</div\>
+<script\>
+const arena =
+  document\.getElementById\("arena"\);
+const gorilla =
+  document\.getElementById\("gorilla"\);
+const menCount =
+  document\.getElementById\("menCount"\);
+const hpText =
+  document\.getElementById\("hpText"\);
+const health =
+  document\.getElementById\("health"\);
+const status =
+  document\.getElementById\("status"\);
+let men = &#91;&#93;;
+let gorillaX = 50;
+let gorillaY = 50;
+let running = false;
 let gorillaHP = 1000;
-let gameOver = false;
-let attacking = false;
-
-const MAX_HP = 1000;
-
-function random(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
-function addLog(text) {
-  const line = document.createElement("div");
-  line.textContent = text;
-  log.prepend(line);
-}
-
-function createMen() {
-
-  men.forEach(man => man.remove());
-
-  men = [];
-
-  for (let i = 0; i < 100; i++) {
-
-    const man = document.createElement("div");
-
-    man.className = "man";
-    man.textContent = "🧑";
-
-    const angle = (Math.PI * 2 / 100) * i;
-
-    const radiusX = random(260, 390);
-    const radiusY = random(150, 210);
-
-    const x = 50 + Math.cos(angle) * radiusX / 10;
-    const y = 50 + Math.sin(angle) * radiusY / 5;
-
-    man.style.left = x + "%";
-    man.style.top = y + "%";
-
-    arena.appendChild(man);
-
-    men.push(man);
-  }
-
-  updateMen();
-}
-
-function updateMen() {
-
-  const alive = men.filter(man =>
-    !man.classList.contains("dead")
-  ).length;
-
-  menCount.textContent = alive;
-}
-
-function updateHealth() {
-
-  const percentage = Math.max(0, gorillaHP / MAX_HP * 100);
-
-  health.style.width = percentage + "%";
-  hpText.textContent = Math.max(0, Math.round(gorillaHP));
-
-  if (percentage < 30) {
-    health.style.background = "#ef4444";
-  }
-  else if (percentage < 60) {
-    health.style.background = "#f59e0b";
-  }
-  else {
-    health.style.background = "#22c55e";
-  }
-}
-
-function gorillaMove() {
-
-  const x = random(42, 58);
-  const y = random(40, 60);
-
-  gorilla.style.left = x + "%";
-  gorilla.style.top = y + "%";
-}
-
-function killMen() {
-
-  const aliveMen = men.filter(man =>
-    !man.classList.contains("dead")
-  );
-
-  if (aliveMen.length === 0) {
-    return 0;
-  }
-
-  const amount = Math.min(
-    aliveMen.length,
-    Math.floor(random(1, 5))
-  );
-
-  for (let i = 0; i < amount; i++) {
-
-    const index = Math.floor(
-      Math.random() * aliveMen.length
-    );
-
-    const victim = aliveMen.splice(index, 1)[0];
-
-    victim.classList.add("dead");
-  }
-
-  updateMen();
-
-  return amount;
-}
-
-function attack() {
-
-  if (gameOver || attacking) {
-    return;
-  }
-
-  attacking = true;
-
-  const aliveMen = men.filter(man =>
-    !man.classList.contains("dead")
-  );
-
-  if (aliveMen.length === 0) {
-    finishGorillaWin();
-    return;
-  }
-
-  status.textContent = "⚔️ Les hommes attaquent !";
-
-  // Animation de plusieurs hommes
-  const attackers = aliveMen
-    .sort(() => Math.random() - 0.5)
-    .slice(0, Math.min(12, aliveMen.length));
-
-  attackers.forEach(man => {
-    man.classList.add("attacking");
-
-    setTimeout(() => {
-      man.classList.remove("attacking");
-    }, 300);
-  });
-
-  // Dégâts des hommes
-  const damage = Math.floor(
-    random(25, 65) * (aliveMen.length / 100)
-  );
-
-  gorillaHP -= damage;
-
-  if (gorillaHP < 0) {
-    gorillaHP = 0;
-  }
-
-  gorilla.classList.add("hit");
-
-  setTimeout(() => {
-    gorilla.classList.remove("hit");
-  }, 250);
-
-  updateHealth();
-
-  addLog(
-    "⚔️ Les hommes infligent " +
-    damage +
-    " dégâts au gorille."
-  );
-
-  if (gorillaHP <= 0) {
-    finishMenWin();
-    return;
-  }
-
-  // Le gorille riposte
-  setTimeout(() => {
-
-    if (gameOver) {
+const MAX\_HP = 1000;
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   OUTILS
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
+function random\(min, max\) \{
+  return Math\.random\(\) \*
+    \(max \- min\) \+ min;
+\}
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   CRÉATION DES HOMMES
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
+function createMen\(\) \{
+  men\.forEach\(man =\>
+    man\.element\.remove\(\)
+  \);
+  men = &#91;&#93;;
+  for \(let i = 0; i < 100; i\+\+\) \{
+    const element =
+      document\.createElement\("div"\);
+    element\.className =
+      "man walk";
+    element\.textContent =
+      "🧑";
+    arena\.appendChild\(element\);
+    const man = \{
+      element: element,
+      x: random\(5, 30\),
+      y: random\(10, 90\),
+      alive: true
+    \};
+    men\.push\(man\);
+  \}
+  updateMen\(\);
+  updatePositions\(\);
+\}
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   POSITIONNEMENT
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
+function updatePositions\(\) \{
+  gorilla\.style\.left =
+    gorillaX \+ "%";
+  gorilla\.style\.top =
+    gorillaY \+ "%";
+  men\.forEach\(man =\> \{
+    if \(\!man\.alive\) \{
       return;
-    }
-
-    gorilla.classList.add("attack");
-
-    setTimeout(() => {
-      gorilla.classList.remove("attack");
-    }, 350);
-
-    const victims = killMen();
-
-    if (victims > 0) {
-
-      status.textContent =
-        "🦍 Le gorille riposte et élimine " +
-        victims +
-        " homme(s) !";
-
-      addLog(
-        "🦍 Le gorille élimine " +
-        victims +
-        " homme(s)."
-      );
-
-    }
-
-    gorillaMove();
-
-    const remaining =
-      men.filter(man =>
-        !man.classList.contains("dead")
-      ).length;
-
-    if (remaining <= 0) {
-      finishGorillaWin();
+    \}
+    man\.element\.style\.left =
+      man\.x \+ "%";
+    man\.element\.style\.top =
+      man\.y \+ "%";
+  \}\);
+\}
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   DÉPLACEMENT DES HOMMES
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
+function moveMen\(\) \{
+  men\.forEach\(man =\> \{
+    if \(\!man\.alive\) \{
       return;
-    }
-
-    attacking = false;
-
-  }, 450);
-}
-
-function finishMenWin() {
-
-  gameOver = true;
-  attacking = false;
-
-  status.textContent =
-    "🏆 VICTOIRE ! LES 100 HOMMES ONT VAINCU LE GORILLE !";
-
-  addLog("🏆 Les hommes remportent le combat !");
-}
-
-function finishGorillaWin() {
-
-  gameOver = true;
-  attacking = false;
-
-  status.textContent =
-    "🦍 VICTOIRE DU GORILLE ! TOUS LES HOMMES SONT À TERRE !";
-
-  addLog("🦍 Le gorille remporte le combat !");
-}
-
-function resetGame() {
-
-  gorillaHP = MAX_HP;
-  gameOver = false;
-  attacking = false;
-
-  gorilla.style.left = "50%";
-  gorilla.style.top = "50%";
-
-  log.innerHTML = "";
-
-  createMen();
-  updateHealth();
-
-  status.textContent =
-    "🔥 Le combat commence !";
-
-  addLog(
-    "🔥 100 hommes entrent dans l'arène."
-  );
-
-  addLog(
-    "🦍 Le gorille attend son adversaire..."
-  );
-}
-
+    \}
+    const dx =
+      gorillaX \- man\.x;
+    const dy =
+      gorillaY \- man\.y;
+    const distance =
+      Math\.sqrt\(dx \* dx \+ dy \* dy\);
+    if \(distance \> 7\) \{
+      const speed = 0\.35;
+      man\.x \+=
+        \(dx / distance\) \*
+        speed;
+      man\.y \+=
+        \(dy / distance\) \*
+        speed;
+    \}
+  \}\);
+\}
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   DÉPLACEMENT DU GORILLE
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
+function moveGorilla\(\) \{
+  const aliveMen =
+    men\.filter\(man =\> man\.alive\);
+  if \(aliveMen\.length === 0\) \{
+    return;
+  \}
+  /\* Le gorille cherche
+     l'homme vivant le plus proche \*/
+  let target = null;
+  let bestDistance =
+    Infinity;
+  aliveMen\.forEach\(man =\> \{
+    const dx =
+      man\.x \- gorillaX;
+    const dy =
+      man\.y \- gorillaY;
+    const distance =
+      Math\.sqrt\(dx \* dx \+ dy \* dy\);
+    if \(distance < bestDistance\) \{
+      bestDistance =
+        distance;
+      target =
+        man;
+    \}
+  \}\);
+  if \(\!target\) \{
+    return;
+  \}
+  const dx =
+    target\.x \- gorillaX;
+  const dy =
+    target\.y \- gorillaY;
+  const distance =
+    Math\.sqrt\(dx \* dx \+ dy \* dy\);
+  if \(distance \> 5\) \{
+    const speed = 0\.28;
+    gorillaX \+=
+      \(dx / distance\) \*
+      speed;
+    gorillaY \+=
+      \(dy / distance\) \*
+      speed;
+  \}
+\}
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   COMBAT
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
+function fight\(\) \{
+  const aliveMen =
+    men\.filter\(man =\> man\.alive\);
+  aliveMen\.forEach\(man =\> \{
+    const dx =
+      man\.x \- gorillaX;
+    const dy =
+      man\.y \- gorillaY;
+    const distance =
+      Math\.sqrt\(dx \* dx \+ dy \* dy\);
+    /\* Un homme attaque
+       s'il est proche \*/
+    if \(distance < 7\) \{
+      const damage =
+        random\(0\.5, 2\);
+      gorillaHP \-=
+        damage;
+    \}
+  \}\);
+  /\* Le gorille attaque
+     les hommes proches \*/
+  aliveMen\.forEach\(man =\> \{
+    const dx =
+      man\.x \- gorillaX;
+    const dy =
+      man\.y \- gorillaY;
+    const distance =
+      Math\.sqrt\(dx \* dx \+ dy \* dy\);
+    if \(distance < 6 &&
+        Math\.random\(\) < 0\.08\) \{
+      man\.alive =
+        false;
+      man\.element\.classList
+        \.remove\("walk"\);
+      man\.element\.classList
+        \.add\("dead"\);
+    \}
+  \}\);
+  if \(gorillaHP <= 0\) \{
+    gorillaHP =
+      0;
+    running =
+      false;
+    status\.textContent =
+      "🏆 LES HOMMES ONT VAINCU LE GORILLE \!";
+  \}
+  const remaining =
+    men\.filter\(man =\> man\.alive\)
+      \.length;
+  if \(remaining === 0\) \{
+    running =
+      false;
+    status\.textContent =
+      "🦍 LE GORILLE A VAINCU LES 100 HOMMES \!";
+  \}
+  updateMen\(\);
+  updateHealth\(\);
+\}
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   AFFICHAGE
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
+function updateMen\(\) \{
+  const remaining =
+    men\.filter\(man =\> man\.alive\)
+      \.length;
+  menCount\.textContent =
+    remaining;
+\}
+function updateHealth\(\) \{
+  const percentage =
+    Math\.max\(
+      0,
+      gorillaHP / MAX\_HP \* 100
+    \);
+  health\.style\.width =
+    percentage \+ "%";
+  hpText\.textContent =
+    Math\.round\(gorillaHP\);
+  if \(percentage < 30\) \{
+    health\.style\.background =
+      "\#ef4444";
+  \}
+  else if \(percentage < 60\) \{
+    health\.style\.background =
+      "\#f59e0b";
+  \}
+  else \{
+    health\.style\.background =
+      "\#22c55e";
+  \}
+\}
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   BOUCLE DU JEU
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
+function gameLoop\(\) \{
+  if \(running\) \{
+    moveMen\(\);
+    moveGorilla\(\);
+    fight\(\);
+    updatePositions\(\);
+  \}
+  requestAnimationFrame\(
+    gameLoop
+  \);
+\}
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   LANCER
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
 document
-  .getElementById("attack")
-  .addEventListener("click", attack);
-
+  \.getElementById\("start"\)
+  \.addEventListener\(
+    "click",
+    function\(\) \{
+      if \(\!running\) \{
+        running =
+          true;
+        status\.textContent =
+          "⚔️ LE COMBAT A COMMENCÉ \!";
+        gorilla\.classList
+          \.add\("walk"\);
+      \}
+    \}
+  \);
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   RECOMMENCER
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
 document
-  .getElementById("reset")
-  .addEventListener("click", resetGame);
-
-resetGame();
-
-</script>
-
-</body>
-</html>
+  \.getElementById\("reset"\)
+  \.addEventListener\(
+    "click",
+    function\(\) \{
+      running =
+        false;
+      gorillaHP =
+        MAX\_HP;
+      gorillaX =
+        50;
+      gorillaY =
+        50;
+      gorilla\.classList
+        \.remove\("walk"\);
+      status\.textContent =
+        "Appuie sur « LANCER LE COMBAT »\.";
+      createMen\(\);
+      updateHealth\(\);
+    \}
+  \);
+/\* \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   INITIALISATION
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \*/
+createMen\(\);
+updateHealth\(\);
+gameLoop\(\);
+</script\>
+</body\>
+</html\>
