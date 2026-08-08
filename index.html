@@ -8,7 +8,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>100 Hommes vs 1 Gorille</title>
+<title>Bagarre Hommes Gorille</title>
 
 <style>
 
@@ -18,7 +18,7 @@ body{
 
 margin:0;
 
-background:#101820;
+background:#080b10;
 
 color:white;
 
@@ -26,21 +26,23 @@ font-family:Arial,sans-serif;
 
 text-align:center;
 
+overflow:hidden;
+
 }
 
 h1{
 
-margin:15px 0 5px;
+margin:10px 0 3px;
 
-font-size:28px;
+font-size:26px;
 
 }
 
 .subtitle{
 
-color:#aaa;
+color:#9ca3af;
 
-margin-bottom:10px;
+font-size:14px;
 
 }
 
@@ -50,107 +52,25 @@ display:flex;
 
 justify-content:center;
 
-gap:25px;
+gap:8px;
 
 flex-wrap:wrap;
 
-font-size:18px;
-
-margin:10px;
+margin:7px;
 
 }
 
-.arena{
+.stat{
 
-position:relative;
+background:#17202a;
 
-width:95%;
+padding:7px 10px;
 
-max-width:1000px;
+border-radius:9px;
 
-height:520px;
+font-size:14px;
 
-margin:auto;
-
-overflow:hidden;
-
-border:4px solid #555;
-
-border-radius:18px;
-
-background:radial-gradient(circle at 50% 50%,#3d583e,#17231b 75%);
-
-box-shadow:0 0 30px #000;
-
-}
-
-.gorilla{
-
-position:absolute;
-
-left:50%;
-
-top:50%;
-
-transform:translate(-50%,-50%);
-
-font-size:85px;
-
-z-index:5;
-
-transition:left .25s linear,top .25s linear;
-
-}
-
-.gorilla.walk{
-
-animation:gorillaWalk .35s infinite alternate;
-
-}
-
-@keyframes gorillaWalk{
-
-from{transform:translate(-50%,-50%) rotate(-3deg)}
-
-to{transform:translate(-50%,-50%) rotate(3deg)}
-
-}
-
-.man{
-
-position:absolute;
-
-font-size:27px;
-
-z-index:3;
-
-transition:left .25s linear,top .25s linear;
-
-user-select:none;
-
-}
-
-.man.walk{
-
-animation:manWalk .25s infinite alternate;
-
-}
-
-@keyframes manWalk{
-
-from{transform:translateY(0)}
-
-to{transform:translateY(-4px)}
-
-}
-
-.man.dead{
-
-opacity:0;
-
-transform:rotate(90deg) scale(.3);
-
-transition:opacity .4s,transform .4s;
+font-weight:bold;
 
 }
 
@@ -160,35 +80,261 @@ width:80%;
 
 max-width:600px;
 
-height:25px;
+height:21px;
 
-background:#333;
+margin:7px auto;
+
+background:#292929;
+
+border:2px solid #666;
 
 border-radius:20px;
 
-margin:10px auto;
-
 overflow:hidden;
-
-border:2px solid #777;
 
 }
 
 .health{
 
-width:100%;
-
 height:100%;
+
+width:100%;
 
 background:#22c55e;
 
-transition:width .25s,background .25s;
+transition:width .2s,background .2s;
+
+}
+
+.viewport{
+
+position:relative;
+
+width:96%;
+
+max-width:1100px;
+
+height:540px;
+
+margin:auto;
+
+overflow:hidden;
+
+border:4px solid #4b5563;
+
+border-radius:20px;
+
+background:#111;
+
+box-shadow:0 0 35px #000;
+
+}
+
+.world{
+
+position:absolute;
+
+width:180%;
+
+height:180%;
+
+left:-40%;
+
+top:-40%;
+
+background:
+
+radial-gradient(circle,#496742 0%,#29402c 45%,#111a14 100%);
+
+transition:transform .18s ease-out;
+
+}
+
+.world:after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+box-shadow:inset 0 0 100px #0009;
+
+pointer-events:none;
+
+}
+
+.arenaMark{
+
+position:absolute;
+
+left:50%;
+
+top:50%;
+
+width:80%;
+
+height:75%;
+
+transform:translate(-50%,-50%);
+
+border:3px solid #ffffff22;
+
+border-radius:50%;
+
+}
+
+.gorilla{
+
+position:absolute;
+
+font-size:82px;
+
+z-index:20;
+
+transform:translate(-50%,-50%);
+
+transition:left .12s linear,top .12s linear;
+
+filter:drop-shadow(0 8px 5px #0009);
+
+}
+
+.gorilla.rage{
+
+animation:rage .22s infinite alternate;
+
+}
+
+@keyframes rage{
+
+from{transform:translate(-50%,-50%) scale(1)}
+
+to{transform:translate(-50%,-50%) scale(1.15)}
+
+}
+
+.man{
+
+position:absolute;
+
+font-size:24px;
+
+z-index:10;
+
+transform:translate(-50%,-50%);
+
+transition:left .1s linear,top .1s linear;
+
+filter:drop-shadow(0 3px 2px #0009);
+
+}
+
+.man.fast{font-size:22px}
+
+.man.strong{font-size:29px}
+
+.man.attack{
+
+animation:punch .2s;
+
+}
+
+@keyframes punch{
+
+50%{transform:translate(-50%,-50%) scale(1.5)}
+
+}
+
+.man.hit{
+
+animation:hit .2s;
+
+}
+
+@keyframes hit{
+
+50%{filter:brightness(2)}
+
+}
+
+.man.dead{
+
+opacity:0;
+
+transform:translate(-50%,-50%) rotate(90deg) scale(.2);
+
+transition:opacity .5s,transform .5s;
+
+}
+
+.effect{
+
+position:absolute;
+
+z-index:40;
+
+font-size:30px;
+
+pointer-events:none;
+
+animation:impact .45s forwards;
+
+}
+
+@keyframes impact{
+
+0%{
+
+opacity:1;
+
+transform:translate(-50%,-50%) scale(.4);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:translate(-50%,-100%) scale(1.5);
+
+}
+
+}
+
+.flash{
+
+position:absolute;
+
+inset:0;
+
+z-index:45;
+
+background:white;
+
+opacity:0;
+
+pointer-events:none;
+
+}
+
+.flash.active{
+
+animation:flash .15s;
+
+}
+
+@keyframes flash{
+
+0%{opacity:.45}
+
+100%{opacity:0}
 
 }
 
 .controls{
 
-margin:15px auto;
+margin:7px;
 
 }
 
@@ -196,13 +342,13 @@ button{
 
 border:0;
 
-border-radius:12px;
+border-radius:11px;
 
-padding:14px 22px;
+padding:11px 15px;
 
-margin:5px;
+margin:3px;
 
-font-size:17px;
+font-size:15px;
 
 font-weight:bold;
 
@@ -218,23 +364,101 @@ color:white;
 
 }
 
+#rageBtn{
+
+background:#dc2626;
+
+color:white;
+
+}
+
 #reset{
 
-background:#ddd;
+background:#e5e7eb;
 
 color:#111;
 
 }
 
+button:active{
+
+transform:scale(.94);
+
+}
+
 #status{
 
-min-height:35px;
+min-height:27px;
 
-font-size:19px;
-
-margin:10px;
+font-size:17px;
 
 font-weight:bold;
+
+margin:5px;
+
+}
+
+.legend{
+
+font-size:12px;
+
+color:#cbd5e1;
+
+}
+
+.overlay{
+
+position:absolute;
+
+inset:0;
+
+z-index:100;
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+background:#000b;
+
+}
+
+.overlay.show{
+
+display:flex;
+
+}
+
+.result{
+
+background:#111827;
+
+border:2px solid #6b7280;
+
+border-radius:20px;
+
+padding:24px;
+
+width:85%;
+
+max-width:430px;
+
+box-shadow:0 0 35px #000;
+
+}
+
+.result h2{
+
+font-size:29px;
+
+margin:5px;
+
+}
+
+.result p{
+
+color:#d1d5db;
 
 }
 
@@ -244,29 +468,45 @@ font-weight:bold;
 
 <body>
 
-<h1>🦍 100 HOMMES VS 1 GORILLE 🧑‍🤝‍🧑</h1>
+<h1>🦍 BAGARRE HOMMES GORILLE 🧑‍🤝‍🧑</h1>
 
 <div class="subtitle">
 
-Les hommes poursuivent le gorille dans l'arène
+100 hommes contre 1 gorille
 
 </div>
 
 <div class="stats">
 
-<div>
+<div class="stat">
 
-🧑 Hommes :
+🧑 Vivants :
 
 <b id="menCount">100</b>
 
 </div>
 
-<div>
+<div class="stat">
+
+⚔️ Attaquants :
+
+<b id="attackers">0</b>
+
+</div>
+
+<div class="stat">
 
 🦍 Vie :
 
 <b id="hpText">1000</b>
+
+</div>
+
+<div class="stat">
+
+🔥 Rage :
+
+<b id="rageText">0%</b>
 
 </div>
 
@@ -278,7 +518,11 @@ Les hommes poursuivent le gorille dans l'arène
 
 </div>
 
-<div id="arena" class="arena">
+<div id="viewport" class="viewport">
+
+<div id="world" class="world">
+
+<div class="arenaMark"></div>
 
 <div id="gorilla" class="gorilla">
 
@@ -288,11 +532,45 @@ Les hommes poursuivent le gorille dans l'arène
 
 </div>
 
+<div id="flash" class="flash"></div>
+
+<div id="overlay" class="overlay">
+
+<div class="result">
+
+<h2 id="resultTitle"></h2>
+
+<p id="resultText"></p>
+
+<button id="resultReset">
+
+🔄 RECOMMENCER
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="legend">
+
+🧑 Normal · 🏃 Rapide · 💪 Fort
+
+</div>
+
 <div class="controls">
 
 <button id="start">
 
-▶️ LANCER LE COMBAT
+▶️ LANCER
+
+</button>
+
+<button id="rageBtn">
+
+🔥 RAGE
 
 </button>
 
@@ -306,35 +584,57 @@ Les hommes poursuivent le gorille dans l'arène
 
 <div id="status">
 
-Appuie sur « LANCER LE COMBAT ».
+Prêt pour la bataille.
 
 </div>
 
 <script>
 
-const arena=document.getElementById("arena");
+const viewport=document.getElementById("viewport");
+
+const world=document.getElementById("world");
 
 const gorilla=document.getElementById("gorilla");
 
 const menCount=document.getElementById("menCount");
 
+const attackersText=document.getElementById("attackers");
+
 const hpText=document.getElementById("hpText");
+
+const rageText=document.getElementById("rageText");
 
 const health=document.getElementById("health");
 
 const status=document.getElementById("status");
 
+const flash=document.getElementById("flash");
+
+const overlay=document.getElementById("overlay");
+
+const resultTitle=document.getElementById("resultTitle");
+
+const resultText=document.getElementById("resultText");
+
 let men=[];
+
+let running=false;
+
+let rage=false;
 
 let gorillaX=50;
 
 let gorillaY=50;
 
-let running=false;
-
 let gorillaHP=1000;
 
 const MAX_HP=1000;
+
+let totalKills=0;
+
+let lastMenAttack=0;
+
+let lastGorillaAttack=0;
 
 function random(min,max){
 
@@ -342,11 +642,31 @@ return Math.random()*(max-min)+min;
 
 }
 
+function distance(a,b,c,d){
+
+let x=c-a;
+
+let y=d-b;
+
+return Math.sqrt(x*x+y*y);
+
+}
+
+function aliveMen(){
+
+return men.filter(function(m){
+
+return m.alive;
+
+});
+
+}
+
 function createMen(){
 
-men.forEach(function(man){
+men.forEach(function(m){
 
-man.element.remove();
+m.el.remove();
 
 });
 
@@ -354,33 +674,75 @@ men=[];
 
 for(let i=0;i<100;i++){
 
-const element=document.createElement("div");
+let el=document.createElement("div");
 
-element.className="man walk";
+let type;
 
-element.textContent="🧑";
+if(i<15){
 
-arena.appendChild(element);
+type="fast";
 
-const man={
+el.textContent="🏃";
 
-element:element,
+}else if(i<25){
 
-x:random(5,30),
+type="strong";
 
-y:random(10,90),
+el.textContent="💪";
 
-alive:true
+}else{
 
-};
+type="normal";
 
-men.push(man);
+el.textContent="🧑";
 
 }
 
-updateMen();
+el.className="man "+type;
+
+world.appendChild(el);
+
+let angle=Math.random()*Math.PI*2;
+
+let radius=random(28,46);
+
+let m={
+
+el:el,
+
+type:type,
+
+x:50+Math.cos(angle)*radius,
+
+y:50+Math.sin(angle)*radius*.75,
+
+alive:true,
+
+health:type==="strong"?150:
+
+type==="fast"?80:100,
+
+speed:type==="fast"?.55:
+
+type==="strong"?.27:.38,
+
+damage:type==="strong"?3.2:
+
+type==="fast"?1.4:1.9
+
+};
+
+m.x=Math.max(3,Math.min(97,m.x));
+
+m.y=Math.max(5,Math.min(95,m.y));
+
+men.push(m);
+
+}
 
 updatePositions();
+
+updateStats();
 
 }
 
@@ -390,13 +752,13 @@ gorilla.style.left=gorillaX+"%";
 
 gorilla.style.top=gorillaY+"%";
 
-men.forEach(function(man){
+men.forEach(function(m){
 
-if(!man.alive)return;
+if(!m.alive)return;
 
-man.element.style.left=man.x+"%";
+m.el.style.left=m.x+"%";
 
-man.element.style.top=man.y+"%";
+m.el.style.top=m.y+"%";
 
 });
 
@@ -404,25 +766,45 @@ man.element.style.top=man.y+"%";
 
 function moveMen(){
 
-men.forEach(function(man){
+let alive=aliveMen();
 
-if(!man.alive)return;
+alive.forEach(function(m,index){
 
-const dx=gorillaX-man.x;
+let angle=
 
-const dy=gorillaY-man.y;
+(Math.PI*2/Math.max(1,alive.length))*index;
 
-const distance=Math.sqrt(dx*dx+dy*dy);
+let radius=4.7;
 
-if(distance>7){
+let targetX=
 
-const speed=.35;
+gorillaX+
 
-man.x+=(dx/distance)*speed;
+Math.cos(angle)*radius;
 
-man.y+=(dy/distance)*speed;
+let targetY=
+
+gorillaY+
+
+Math.sin(angle)*radius*.8;
+
+let dx=targetX-m.x;
+
+let dy=targetY-m.y;
+
+let d=Math.sqrt(dx*dx+dy*dy);
+
+if(d>.5){
+
+m.x+=(dx/d)*m.speed*.32;
+
+m.y+=(dy/d)*m.speed*.32;
 
 }
+
+m.x=Math.max(2,Math.min(98,m.x));
+
+m.y=Math.max(4,Math.min(96,m.y));
 
 });
 
@@ -430,31 +812,33 @@ man.y+=(dy/distance)*speed;
 
 function moveGorilla(){
 
-const aliveMen=men.filter(function(man){
+let alive=aliveMen();
 
-return man.alive;
-
-});
-
-if(aliveMen.length===0)return;
+if(alive.length===0)return;
 
 let target=null;
 
-let bestDistance=Infinity;
+let best=Infinity;
 
-aliveMen.forEach(function(man){
+alive.forEach(function(m){
 
-const dx=man.x-gorillaX;
+let d=distance(
 
-const dy=man.y-gorillaY;
+gorillaX,
 
-const distance=Math.sqrt(dx*dx+dy*dy);
+gorillaY,
 
-if(distance<bestDistance){
+m.x,
 
-bestDistance=distance;
+m.y
 
-target=man;
+);
+
+if(d<best){
+
+best=d;
+
+target=m;
 
 }
 
@@ -462,139 +846,259 @@ target=man;
 
 if(!target)return;
 
-const dx=target.x-gorillaX;
+let dx=target.x-gorillaX;
 
-const dy=target.y-gorillaY;
+let dy=target.y-gorillaY;
 
-const distance=Math.sqrt(dx*dx+dy*dy);
+let d=Math.sqrt(dx*dx+dy*dy);
 
-if(distance>5){
+if(d>4){
 
-const speed=.28;
+let speed=rage?.34:.20;
 
-gorillaX+=(dx/distance)*speed;
+gorillaX+=(dx/d)*speed;
 
-gorillaY+=(dy/distance)*speed;
-
-}
+gorillaY+=(dy/d)*speed;
 
 }
 
-function fight(){
+gorillaX=Math.max(5,Math.min(95,gorillaX));
 
-const aliveMen=men.filter(function(man){
+gorillaY=Math.max(7,Math.min(93,gorillaY));
 
-return man.alive;
+}
+
+function createEffect(x,y,text){
+
+let e=document.createElement("div");
+
+e.className="effect";
+
+e.textContent=text;
+
+e.style.left=x+"%";
+
+e.style.top=y+"%";
+
+world.appendChild(e);
+
+setTimeout(function(){
+
+e.remove();
+
+},450);
+
+}
+
+function screenFlash(){
+
+flash.classList.remove("active");
+
+void flash.offsetWidth;
+
+flash.classList.add("active");
+
+}
+
+function menAttack(){
+
+let now=Date.now();
+
+if(now-lastMenAttack<180)return;
+
+lastMenAttack=now;
+
+let alive=aliveMen();
+
+let damage=0;
+
+let attackers=0;
+
+alive.forEach(function(m){
+
+let d=distance(
+
+m.x,
+
+m.y,
+
+gorillaX,
+
+gorillaY
+
+);
+
+if(d<7){
+
+attackers++;
+
+damage+=m.damage;
+
+m.el.classList.add("attack");
+
+setTimeout(function(){
+
+m.el.classList.remove("attack");
+
+},200);
+
+createEffect(
+
+gorillaX+random(-3,3),
+
+gorillaY+random(-3,3),
+
+"💥"
+
+);
+
+}
 
 });
 
-aliveMen.forEach(function(man){
-
-const dx=man.x-gorillaX;
-
-const dy=man.y-gorillaY;
-
-const distance=Math.sqrt(dx*dx+dy*dy);
-
-if(distance<7){
-
-const damage=random(.5,2);
+if(attackers>0){
 
 gorillaHP-=damage;
 
-}
-
-});
-
-aliveMen.forEach(function(man){
-
-const dx=man.x-gorillaX;
-
-const dy=man.y-gorillaY;
-
-const distance=Math.sqrt(dx*dx+dy*dy);
-
-if(distance<6&&Math.random()<.08){
-
-man.alive=false;
-
-man.element.classList.remove("walk");
-
-man.element.classList.add("dead");
-
-}
-
-});
-
-if(gorillaHP<=0){
+if(gorillaHP<0){
 
 gorillaHP=0;
 
-running=false;
+}
+
+}
+
+}
+
+function gorillaAttack(){
+
+let now=Date.now();
+
+if(now-lastGorillaAttack<500)return;
+
+lastGorillaAttack=now;
+
+let alive=aliveMen();
+
+let nearby=alive.filter(function(m){
+
+return distance(
+
+m.x,
+
+m.y,
+
+gorillaX,
+
+gorillaY
+
+)<6.5;
+
+});
+
+if(nearby.length===0)return;
+
+let victims=nearby
+
+.sort(function(){
+
+return Math.random()-.5;
+
+})
+
+.slice(0,rage?3:1);
+
+gorilla.style.transform=
+
+"translate(-50%,-50%) scale(1.2)";
+
+screenFlash();
+
+setTimeout(function(){
+
+gorilla.style.transform=
+
+"translate(-50%,-50%) scale(1)";
+
+},180);
+
+victims.forEach(function(m){
+
+let damage=rage?90:65;
+
+m.health-=damage;
+
+m.el.classList.add("hit");
+
+createEffect(
+
+m.x,
+
+m.y,
+
+"💥"
+
+);
+
+setTimeout(function(){
+
+m.el.classList.remove("hit");
+
+},250);
+
+if(m.health<=0){
+
+m.alive=false;
+
+m.el.classList.add("dead");
+
+totalKills++;
+
+}
+
+});
+
+}
+
+function updateRage(){
+
+let percent=
+
+Math.round((1-gorillaHP/MAX_HP)*100);
+
+percent=Math.max(0,Math.min(100,percent));
+
+rageText.textContent=percent+"%";
+
+if(percent>=60&&!rage){
+
+rage=true;
+
+gorilla.classList.add("rage");
 
 status.textContent=
 
-"🏆 LES HOMMES ONT VAINCU LE GORILLE !";
-
-gorilla.classList.remove("walk");
+"🔥 LE GORILLE ENTRE EN RAGE !";
 
 }
-
-const remaining=men.filter(function(man){
-
-return man.alive;
-
-}).length;
-
-if(remaining===0){
-
-running=false;
-
-status.textContent=
-
-"🦍 LE GORILLE A VAINCU LES 100 HOMMES !";
-
-gorilla.classList.remove("walk");
-
-}
-
-updateMen();
-
-updateHealth();
-
-}
-
-function updateMen(){
-
-const remaining=men.filter(function(man){
-
-return man.alive;
-
-}).length;
-
-menCount.textContent=remaining;
 
 }
 
 function updateHealth(){
 
-const percentage=Math.max(
+let percent=
 
-0,
+Math.max(0,gorillaHP/MAX_HP*100);
 
-gorillaHP/MAX_HP*100
-
-);
-
-health.style.width=percentage+"%";
+health.style.width=percent+"%";
 
 hpText.textContent=Math.round(gorillaHP);
 
-if(percentage<30){
+if(percent<25){
 
 health.style.background="#ef4444";
 
-}else if(percentage<60){
+}else if(percent<55){
 
 health.style.background="#f59e0b";
 
@@ -603,6 +1107,124 @@ health.style.background="#f59e0b";
 health.style.background="#22c55e";
 
 }
+
+updateRage();
+
+}
+
+function updateStats(){
+
+let alive=aliveMen();
+
+menCount.textContent=alive.length;
+
+attackersText.textContent=
+
+alive.filter(function(m){
+
+return distance(
+
+m.x,
+
+m.y,
+
+gorillaX,
+
+gorillaY
+
+)<7;
+
+}).length;
+
+}
+
+function updateCamera(){
+
+/*
+
+La caméra regarde légèrement
+
+vers le gorille et l'action.
+
+*/
+
+let cameraX=
+
+50+(gorillaX-50)*0.55;
+
+let cameraY=
+
+50+(gorillaY-50)*0.55;
+
+let offsetX=
+
+(cameraX-50)*0.65;
+
+let offsetY=
+
+(cameraY-50)*0.65;
+
+let zoom=1;
+
+if(rage){
+
+zoom=1.08;
+
+}
+
+world.style.transform=
+
+"translate("+(-offsetX)+"%,"+
+
+(-offsetY)+"%) scale("+zoom+")";
+
+}
+
+function finishMen(){
+
+running=false;
+
+gorilla.classList.remove("rage");
+
+resultTitle.textContent=
+
+"🏆 VICTOIRE DES HOMMES !";
+
+resultText.textContent=
+
+"Le gorille est vaincu. "+
+
+totalKills+
+
+" hommes ont été éliminés.";
+
+overlay.classList.add("show");
+
+status.textContent=
+
+"🏆 Les hommes remportent la bataille !";
+
+}
+
+function finishGorilla(){
+
+running=false;
+
+gorilla.classList.remove("rage");
+
+resultTitle.textContent=
+
+"🦍 VICTOIRE DU GORILLE !";
+
+resultText.textContent=
+
+"Le gorille a éliminé les 100 hommes.";
+
+overlay.classList.add("show");
+
+status.textContent=
+
+"🦍 Le gorille remporte la bataille !";
 
 }
 
@@ -614,9 +1236,29 @@ moveMen();
 
 moveGorilla();
 
-fight();
+menAttack();
+
+gorillaAttack();
 
 updatePositions();
+
+updateStats();
+
+updateHealth();
+
+updateCamera();
+
+if(gorillaHP<=0){
+
+finishMen();
+
+}
+
+if(aliveMen().length===0){
+
+finishGorilla();
+
+}
 
 }
 
@@ -624,33 +1266,11 @@ requestAnimationFrame(gameLoop);
 
 }
 
-document.getElementById("start").addEventListener(
-
-"click",
-
-function(){
-
-if(!running){
-
-running=true;
-
-status.textContent=
-
-"⚔️ LE COMBAT A COMMENCÉ !";
-
-gorilla.classList.add("walk");
-
-}
-
-});
-
-document.getElementById("reset").addEventListener(
-
-"click",
-
-function(){
+function resetGame(){
 
 running=false;
+
+rage=false;
 
 gorillaHP=MAX_HP;
 
@@ -658,21 +1278,69 @@ gorillaX=50;
 
 gorillaY=50;
 
-gorilla.classList.remove("walk");
+totalKills=0;
+
+gorilla.classList.remove("rage");
+
+world.style.transform=
+
+"translate(0%,0%) scale(1)";
+
+overlay.classList.remove("show");
 
 status.textContent=
 
-"Appuie sur « LANCER LE COMBAT ».";
+"Prêt pour la bataille.";
 
 createMen();
 
 updateHealth();
+
+updateStats();
+
+}
+
+document.getElementById("start")
+
+.addEventListener("click",function(){
+
+if(!running){
+
+running=true;
+
+status.textContent=
+
+"⚔️ LA BATAILLE COMMENCE !";
+
+}
 
 });
 
-createMen();
+document.getElementById("rageBtn")
 
-updateHealth();
+.addEventListener("click",function(){
+
+if(!running)return;
+
+rage=true;
+
+gorilla.classList.add("rage");
+
+status.textContent=
+
+"🔥 MODE RAGE ACTIVÉ !";
+
+});
+
+document.getElementById("reset")
+
+.addEventListener("click",resetGame);
+
+document.getElementById("resultReset")
+
+.addEventListener("click",resetGame);
+
+resetGame();
 
 gameLoop();
 
